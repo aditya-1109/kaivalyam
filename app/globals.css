@@ -19,8 +19,32 @@
   }
 }
 
+
+
+@font-face {
+  font-family: "askan";
+  src: url("/fonts/Askan.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "askan-bold";
+  src: url("/fonts/Askan-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "askan-medium";
+  src: url("/fonts/Askan-Medium.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "askan", "askan-medium", "askan-bold";
 }
+
