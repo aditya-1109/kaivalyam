@@ -2,17 +2,47 @@
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
+function TypingText({ text }: { text: string }) {
+    const [displayText, setDisplayText] = useState("");
+    const speed = 4500/text.length; 
+
+    useEffect(() => {
+        let index = 0;
+        setDisplayText("");
+
+        const interval = setInterval(() => {
+            setDisplayText((prev) => prev + text[index]);
+            index++;
+
+            if (index === text.length) {
+                clearInterval(interval);
+            }
+        }, speed);
+
+        return () => clearInterval(interval);
+    }, [text]);
+
+    return (
+        <p className="text-white font-bold font-askan text-4xl w-[70%] flex flex-wrap">
+            {displayText}
+        </p>
+    );
+}
+
+
+
 export default function HomePage() {
 
-    const [headerIndex, setHeaderIndex]= useState(1)
+    const [headerIndex, setHeaderIndex] = useState(1)
 
-  useEffect(() => {
-  const inter = setInterval(() => {
-    setHeaderIndex(prev => prev + 1 > 3 ? 1 : prev + 1);
-  }, 3000);
+    useEffect(() => {
+        const inter = setInterval(() => {
+            setHeaderIndex(prev => prev + 1 > 3 ? 1 : prev + 1);
+        }, 5000);
 
-  return () => clearInterval(inter);
-}, []);
+
+        return () => clearInterval(inter);
+    }, []);
     return (
         <div className='w-full h-full flex flex-col  bg-linear-to-l from-[#2d2d2d] via-[#5d5d5d] to-[#2a2a2a]'>
             <section className='hidden md:flex flex-row justify-between w-full px-4  items-center'>
@@ -66,7 +96,7 @@ export default function HomePage() {
             <section className='flex flex-row w-full p-4 justify-between items-center'>
                 {[1, 2, 3].map((item, index) => (
                     headerIndex === item &&
-                    <div key={index} className='flex flex-row justify-between items-center w-full'>
+                    <div key={index} className='flex flex-row animate-upndown justify-between items-center w-full'>
 
                         <div className='w-[50%] flex flex-col justify-center items-start gap-2'>
                             <h1 className='flex flex-row gap-2 justify-start items-center'>
@@ -82,12 +112,23 @@ export default function HomePage() {
 
                                 <p className='text-white font-bold font-askan text-lg'>{item===1 ? "Company Register" : item ===2 ? "Account Service" : "Tex Paayment"}</p>
 
+                              
                             </h1>
+
+                              <TypingText
+                                    text={
+                                        item === 1
+                                            ? "Start Your Business Journey with Seamless Company Registration"
+                                            : item === 2
+                                                ? "Smart Accounting Solutions That Keep Your Business on Track"
+                                                : "Hassle-Free Tax Payments, Done Right and On Time"
+                                    }
+                                />
 
                         </div>
 
                         <div className='w-[50%] flex justify-center items-center'>
-                            <Image src={item===1 ? "/header2.png" : item ===2 ? "/header3.webp" : "/header4.webp"} alt='header' width={300} height={300} className='w-[80%] aspect-square' />
+                            <Image src={item === 1 ? "/header2.png" : item === 2 ? "/header3.webp" : "/header4.webp"} alt='header' width={300} height={300} className='w-[80%] aspect-square' />
                         </div>
                     </div>
                 ))}

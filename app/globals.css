@@ -48,3 +48,25 @@ body {
   font-family: "askan", "askan-medium", "askan-bold";
 }
 
+@keyframes upndown {
+  0%{
+    transform: translateY(200);
+    opacity: 0;
+  }
+  20%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+  80%{
+    transform: translateZ(0);
+    opacity: 1;
+  }
+  100%{
+    transform: translateY(-200);
+    opacity: 0;
+  }
+}
+
+.animate-upndown {
+  animation: upndown ease-in-out 5s infinite;
+}
