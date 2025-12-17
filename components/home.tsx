@@ -23,7 +23,7 @@ function TypingText({ text }: { text: string }) {
     }, [text]);
 
     return (
-        <p className="text-white font-bold font-askan text-4xl w-[70%] flex flex-wrap">
+        <p className="text-white font-bold font-askan text-[5vw] lg:text-[4vw] w-full md:w-[70%] flex flex-wrap">
             {displayText}
         </p>
     );
@@ -110,7 +110,7 @@ export default function HomePage() {
                                         stroke-linejoin="round" />
                                 </svg>
 
-                                <p className='text-white font-bold font-askan text-lg'>{item===1 ? "Company Register" : item ===2 ? "Account Service" : "Tex Paayment"}</p>
+                                <p className='text-white font-bold font-askan  text-[2vw]'>{item===1 ? "Company Register" : item ===2 ? "Account Service" : "Tex Paayment"}</p>
 
                               
                             </h1>
