@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 
 export function Footer() {
   return (
-    <footer className="py-6 px-4 sm:px-6 lg:px-8 bg-black text-white border-t border-white/20">
+    <footer className="py-6 px-4 sm:px-6 lg:px-8 bg-[#08162B] text-white border-t border-white/20">
       <div className="max-w-7xl mx-auto text-center">
         <motion.p 
           className="text-sm opacity-75"

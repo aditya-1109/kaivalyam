@@ -1,64 +1,113 @@
-import { motion } from 'motion/react';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { motion } from "motion/react";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 export function ApproachSection() {
   const { ref, isVisible } = useScrollAnimation();
 
   const steps = [
-    "Understanding the Client's Business and Legal Position",
-    "Identification of Tax and Regulatory Risks",
-    "Strategy Based on Statutory Provisions and Case Law",
-    "Accurate Drafting, Filing, and Representation",
-    "Ongoing Advisory and Compliance Support"
+    {
+      title: "Business & Legal Assessment",
+      desc: "We begin by understanding the client’s commercial structure, transactions, and legal standing."
+    },
+    {
+      title: "Risk Identification",
+      desc: "Tax exposure, regulatory gaps, and compliance vulnerabilities are identified with precision."
+    },
+    {
+      title: "Statutory Strategy",
+      desc: "Solutions are designed strictly in line with statutory provisions and judicial precedents."
+    },
+    {
+      title: "Execution & Representation",
+      desc: "Drafting, filings, replies, and representations are handled with accuracy and clarity."
+    },
+    {
+      title: "Ongoing Advisory",
+      desc: "We support long-term compliance and provide proactive legal guidance."
+    }
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary" ref={ref}>
-      <div className="max-w-7xl mx-auto">
-        <motion.div 
-          className="border-b-2 border-black pb-4 mb-12"
-          initial={{ opacity: 0, x: -50 }}
-          animate={isVisible ? { opacity: 1, x: 0 } : {}}
+    <section
+      id="approaches"
+      ref={ref}
+      className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#F8FAFD] overflow-hidden"
+    >
+      {/* Background Design */}
+      <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(90deg,#000_1px,transparent_1px),linear-gradient(#000_1px,transparent_1px)] [background-size:24px_24px]" />
+
+      <motion.div
+        className="absolute top-32 left-0 w-80 h-80 bg-[#0B1F3B]/10 rounded-full blur-3xl"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 12, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-0 w-96 h-96 bg-[#8B6F3D]/20 rounded-full blur-3xl"
+        animate={{ scale: [1.2, 1, 1.2] }}
+        transition={{ duration: 14, repeat: Infinity }}
+      />
+
+      <div className="relative max-w-6xl mx-auto">
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-4xl text-black">Our Approach</h2>
+          <h2 className="text-3xl md:text-4xl font-semibold text-[#0B1F3B]">
+            Our Strategic Approach
+          </h2>
+          <p className="mt-4 text-[#4B5563] max-w-2xl mx-auto">
+            A structured, law-centric methodology designed to deliver clarity,
+            compliance, and defensible outcomes.
+          </p>
         </motion.div>
-        
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 text-black">
+
+        {/* Timeline */}
+        <div className="relative">
+          {/* Vertical Line */}
+          <div className="absolute left-1/2 top-0 h-full w-[2px] bg-gradient-to-b from-[#8B6F3D] via-[#0B1F3B] to-[#8B6F3D] -translate-x-1/2" />
+
+          <div className="space-y-16">
             {steps.map((step, index) => (
-              <motion.div 
-                key={index} 
-                className="flex items-start group"
-                initial={{ opacity: 0, x: -30 }}
-                animate={isVisible ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+                className={`relative flex ${
+                  index % 2 === 0 ? "justify-start" : "justify-end"
+                }`}
               >
-                <motion.div 
-                  className="flex-shrink-0 w-10 h-10 bg-black text-white flex items-center justify-center mr-4"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <span>{index + 1}</span>
-                </motion.div>
-                <p className="pt-2">{step}</p>
+                {/* Card */}
+                <div className="w-full z-10 md:w-[46%] bg-white/70 backdrop-blur-lg border border-[#0B1F3B]/15 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all">
+                  <h3 className="text-xl font-semibold text-[#0B1F3B] mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="text-[#2B2B2B] leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
+
+                {/* Dot */}
+                <span className="absolute left-1/2 top-8 -translate-x-1/2 w-5 h-5 rounded-full bg-[#8B6F3D] border-4 border-white shadow-md" />
               </motion.div>
             ))}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative h-96 lg:h-full min-h-[400px] overflow-hidden border-2 border-black"
-          >
-            <img 
-              src="https://images.unsplash.com/photo-1758518731462-d091b0b4ed0d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsZWdhbCUyMGRvY3VtZW50cyUyMG9mZmljZXxlbnwxfHx8fDE3NjU5ODEwNDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-              alt="Legal Documentation"
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-            />
-          </motion.div>
         </div>
+
+        {/* Bottom Statement */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-24 text-center"
+        >
+          <p className="inline-block px-8 py-4 bg-[#0B1F3B] text-white rounded-full text-sm tracking-wide shadow-lg">
+            Precision • Compliance • Legal Certainty
+          </p>
+        </motion.div>
       </div>
     </section>
   );

@@ -3,8 +3,8 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 export function ServicesSection() {
   const { ref, isVisible } = useScrollAnimation();
-
   const services = [
+
     {
       title: "Goods and Services Tax (GST)",
       items: [

@@ -1,54 +1,110 @@
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useEffect, useRef, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
-  };
+  // Close menu on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(e.target) &&
+        !buttonRef.current.contains(e.target)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-   
-            <section className='flex flex-row sticky md:mt-15 top-0 z-20 justify-between w-full px-4  items-center bg-linear-to-l from-[#000] to-[#011226]'>
-                <div className='flex lg:hidden '>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-                        <line x1="3" y1="6" x2="21" y2="6" stroke="white" stroke-width="2" stroke-linecap="round" />
-                        <line x1="3" y1="12" x2="21" y2="12" stroke="white" stroke-width="2" stroke-linecap="round" />
-                        <line x1="3" y1="18" x2="21" y2="18" stroke="white" stroke-width="2" stroke-linecap="round" />
-                    </svg>
+    <header className="sticky top-0 z-20 lg:mt-10 bg-linear-to-l from-black to-[#011226]">
+      <section className="flex items-center justify-between w-full px-4 py-1">
+        
+        {/* Mobile Menu Button */}
+        <button
+          ref={buttonRef}
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+          className="lg:hidden text-white"
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
+        </button>
 
-                </div>
-                <div className='flex flex-col -gap-2 justify-center items-start'>
-                    <p className='text-[#deae41] text-[20px] lg:text-[40px] font-bold font-askan-bold'>
+        {/* Logo */}
+        <div className="flex flex-col">
+          <p className="text-[#deae41] text-[22px] lg:text-[40px] font-bold">
+            KAIVALYAM
+          </p>
+          <p className="text-[#deae41] text-[10px] lg:text-[18px] tracking-wide">
+            TAX CONSULTING
+          </p>
+        </div>
 
-                        KAIVALYAM
-                    </p>
+        {/* Desktop Menu */}
+        <nav className="hidden lg:flex gap-8 text-white font-semibold">
+          {[
+            ["Home", "#"],
+            ["About Us", "#about"],
+            ["Services", "#services"],
+            ["Features", "#features"],
+            ["Approach", "#approaches"],
+            ["Contact Us", "#contact"],
+          ].map(([label, link]) => (
+            <a
+              key={label}
+              href={link}
+              className="hover:text-blue-500 transition-transform hover:scale-105"
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
 
-                    <p className='text-[#deae41] text-[10px] lg:text-[20px] font-askan-bold'>
+        {/* CTA Button */}
+        <button className="bg-[#8B6F3D] text-[#0B1F3B] px-2 py-1 text-sm lg:text-lg lg:px-6 lg:py-3 rounded-lg font-semibold hover:opacity-90 transition">
+              Schedule a Consultation
+            </button>
+      </section>
 
-                        TAX CONSULTING
-                    </p>
-
-                </div>
-
-                <div className='hidden  lg:flex flex-row gap-10 text-white font-bold'>
-                    <p className='cursor-pointer hover:scale-[1.1] hover:text-blue-500'>Home</p>
-                    <p className='cursor-pointer hover:scale-[1.1] hover:text-blue-500'>About US</p>
-                    <p className='cursor-pointer hover:scale-[1.1] hover:text-blue-500'>Registration</p>
-                    <p className='cursor-pointer hover:scale-[1.1] hover:text-blue-500'>Compliances</p>
-                    <p className='cursor-pointer hover:scale-[1.1] hover:text-blue-500'>Careers</p>
-                    <p className='cursor-pointer hover:scale-[1.1] hover:text-blue-500'>Blogs</p>
-                    <p className='cursor-pointer hover:scale-[1.1] hover:text-blue-500'>Contact us</p>
-                </div>
-
-                <button className='flex bg-linear-to-r from-[#deae41] to-[#e6c370] text-white font-bold px-4 py-2 rounded-lg'>Get It</button>
-            </section>
-
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.nav
+            ref={menuRef}
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ duration: 0.25 }}
+            className="lg:hidden fixed top-14 left-0 w-[60vw] h-screen bg-white text-black p-6 flex flex-col gap-4 shadow-lg"
+          >
+            {[
+              ["Home", "#"],
+              ["About Us", "#about"],
+              ["Services", "#services"],
+              ["Features", "#features"],
+              ["Approach", "#approaches"],
+              ["Contact Us", "#contact"],
+            ].map(([label, link]) => (
+              <a
+                key={label}
+                href={link}
+                onClick={() => setIsMenuOpen(false)}
+                className="font-medium hover:text-blue-600"
+              >
+                {label}
+              </a>
+            ))}
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }
