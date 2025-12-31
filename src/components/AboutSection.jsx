@@ -48,7 +48,7 @@ export function AboutSection() {
             className="relative h-[420px] overflow-hidden rounded-xl border border-[#8B6F3D]/30 shadow-sm"
           >
             <img
-              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
+              src="bg3.webp"
               alt="Professional office workspace"
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
             />

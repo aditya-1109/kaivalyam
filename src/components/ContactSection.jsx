@@ -18,10 +18,11 @@ export function ContactSection() {
         transition={{ duration: 12, repeat: Infinity }}
       />
       <motion.div
-        className="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-[#8B6F3D]/10 rounded-full blur-3xl"
+        className="absolute bottom-0 right-0 w-[28rem] h-[28rem] z-3 bg-[#8B6F3D]/10 rounded-full blur-3xl"
         animate={{ scale: [1.2, 1, 1.2] }}
         transition={{ duration: 14, repeat: Infinity }}
       />
+      <img src="bg2.webp" alt="bg" className="absolute w-full h-full opacity-5 top-0 left-0 z-2" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Heading */}

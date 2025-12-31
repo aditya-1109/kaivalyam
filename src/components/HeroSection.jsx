@@ -1,6 +1,17 @@
 import { motion } from "motion/react";
 
 export function HeroSection() {
+
+  const goWhatsapp = () => {
+  const phoneNumber = "+918800937784"; 
+  const message = "Hello! I would like to know more about your services.";
+
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+  window.open(whatsappUrl, "_blank");
+};
+
   return (
     <>
       {/* Top Info Bar */}
@@ -22,7 +33,7 @@ export function HeroSection() {
             KaivalyamTaxConsulting@gmail.com
           </p>
 
-          <p>4/35 First Floor, Bazar Gali, Shahdara, Delhi-32</p>
+          <p>4/35 First Floor, Bazar Gali, Vishwas Nagar, Delhi-32</p>
 
           <p className="border border-[#8B6F3D]/40 rounded-md px-4 py-1">
             +91-8800937784
@@ -38,7 +49,7 @@ export function HeroSection() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1762341117487-dbc411bcf574"
+            src="bg1.webp"
             alt="Professional Office"
             className="w-full h-full object-cover opacity-15"
           />
@@ -111,7 +122,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <button className="bg-[#8B6F3D] text-[#0B1F3B] px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+            <button onClick={()=> goWhatsapp()} className="bg-[#8B6F3D] text-[#0B1F3B] px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">
               Schedule a Consultation
             </button>
           </motion.div>

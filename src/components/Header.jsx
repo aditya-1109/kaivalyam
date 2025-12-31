@@ -7,6 +7,16 @@ export function Header() {
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
 
+    const goWhatsapp = () => {
+  const phoneNumber = "+918800937784"; 
+  const message = "Hello! I would like to know more about your services.";
+
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+  window.open(whatsappUrl, "_blank");
+};
+
   // Close menu on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -69,7 +79,7 @@ export function Header() {
         </nav>
 
         {/* CTA Button */}
-        <button className="bg-[#8B6F3D] text-[#0B1F3B] px-2 py-1 text-sm lg:text-lg lg:px-6 lg:py-3 rounded-lg font-semibold hover:opacity-90 transition">
+        <button onClick={()=> goWhatsapp()} className="bg-[#8B6F3D] text-[#0B1F3B] px-2 py-1 text-sm lg:text-lg lg:px-6 lg:py-3 rounded-lg font-semibold hover:opacity-90 transition">
               Schedule a Consultation
             </button>
       </section>

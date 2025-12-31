@@ -86,7 +86,7 @@ export function WhyChooseUsSection() {
             "
           >
             <img
-              src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1350&q=80"
+              src="bg4.webp"
               alt="Professional Office Workspace"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
             />
