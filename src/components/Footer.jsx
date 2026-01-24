@@ -11,7 +11,7 @@ export function Footer() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          © {new Date().getFullYear()} Kaivalyam Tax Consulting. All rights reserved.
+          © {new Date().getFullYear()} Kaivalyam Tax Consulting. All rights reserved. Made by Codelevate with ❤️
         </motion.p>
       </div>
     </footer>
