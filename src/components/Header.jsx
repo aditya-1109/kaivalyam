@@ -1,9 +1,8 @@
-import { use, useEffect, useRef, useState } from "react";
-import { Home, Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import {  useEffect, useRef, useState } from "react";
+import { Menu } from "lucide-react";
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
@@ -49,24 +48,8 @@ export function Header() {
     return () => clearInterval(interval);
   }, [increasing]);
 
-  // Close menu on outside click
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(e.target) &&
-        !buttonRef.current.contains(e.target)
-      ) {
-        setIsMenuOpen(false);
-      }
-    };
+  
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  console.log(scrollY);
 
   return (
     <header className="sticky top-0 z-20 lg:mt-10 bg-linear-to-l from-black to-[#011226]">
@@ -121,37 +104,7 @@ export function Header() {
 
       </section>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.nav
-            ref={menuRef}
-            initial={{ x: "-100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
-            transition={{ duration: 0.25 }}
-            className="lg:hidden fixed top-14 left-0 w-[60vw] h-screen bg-white text-black p-6 flex flex-col gap-4 shadow-lg"
-          >
-            {[
-              ["Home", "#"],
-              ["About Us", "#about"],
-              ["Services", "#services"],
-              ["Features", "#features"],
-              ["Approach", "#approaches"],
-              ["Contact Us", "#contact"],
-            ].map(([label, link]) => (
-              <a
-                key={label}
-                href={link}
-                onClick={() => setIsMenuOpen(false)}
-                className="font-medium hover:text-blue-600"
-              >
-                {label}
-              </a>
-            ))}
-          </motion.nav>
-        )}
-      </AnimatePresence>
+      
 
       <div
         className="fixed inset-0 z-50 overflow-hidden"
@@ -183,7 +136,7 @@ export function Header() {
               <a
                 key={label}
                 href={link}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setIncreasing(false)}
                 className="relative group transition-all duration-300 hover:text-[#C6A85A]"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
