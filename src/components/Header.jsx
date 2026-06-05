@@ -61,14 +61,15 @@ export function Header() {
 
 
           {/* Logo */}
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <p className="text-[#deae41] text-[22px] lg:text-[40px] font-bold">
               KAIVALYAM
             </p>
             <p className="text-[#deae41] text-[10px] lg:text-[18px] tracking-wide">
               TAX CONSULTING
             </p>
-          </div>
+          </div> */}
+          <img src="/logoKail.png" alt="Logo" className="h-20 w-30" />
         </div>
 
         {/* Desktop Menu */}
